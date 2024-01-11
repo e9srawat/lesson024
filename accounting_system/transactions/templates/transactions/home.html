@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Welcome</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Add your custom styles here */
+        body {
+            background: url('{% static "wall2.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            margin: 0;
+            /* Remove default margin to ensure the background covers the entire viewport */
+            font-family: 'Open Sans', sans-serif; /* Apply the custom font */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 40vw;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            /* Text color for the welcome message */
+            padding: 20px;
+            /* Padding for the container */
+        }
+
+        .btn-lg {
+            width: 200px;
+        }
+
+        .logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            /* Ensure buttons are positioned horizontally */
+            justify-content: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Get Started</h1>
+        <div class="buttons">
+            <a href="{% url 'login' %}" class="btn btn-success btn-lg">Login</a>
+            <p>&nbsp;&nbsp;&nbsp;</p>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Signup</a>
+        </div>
+        <img src="{% static "logo.svg" %}" alt="Your Logo" class="logo card-header" style="position: absolute; bottom: 50px;">
+        <h5 style="position: absolute; bottom: 50px;">Accounting System</h5>
+        <p style="position: absolute; bottom: 15px;">powered by Django</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

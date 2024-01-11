@@ -1,0 +1,53 @@
+<!-- transactions/templates/transactions/add_transaction.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Transaction</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="container"> <!-- Add 'container' class for Bootstrap styling -->
+
+    <h1 class="mt-4">Add Transaction</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Use Bootstrap form classes -->
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+
+    {% if new_transaction %}
+        <div class="mt-4">
+            <h2>Just Entered Transaction</h2>
+            <p><strong>Date:</strong> {{ new_transaction.date }}</p>
+            <p><strong>Category:</strong> {{ new_transaction.category }}</p>
+            <p><strong>Amount:</strong> ${{ new_transaction.amount }}</p>
+            <p><strong>Mode of Payment:</strong> {{ new_transaction.mode_of_payment }}</p>
+        </div>
+    {% endif %}
+
+    <div class="mt-4">
+        <h2>Previous Transactions</h2>
+        <ul class="list-group">
+            {% for transaction in transactions %}
+                <li class="list-group-item">{{ transaction.date }} - {{ transaction.category }} - ${{ transaction.amount }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="{% url 'generate_report' %}" class="btn btn-success mt-4">Generate Report</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger mt-4">Logout</a>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

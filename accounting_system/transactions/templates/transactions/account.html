@@ -1,0 +1,38 @@
+<!-- transactions/templates/transactions/generate_report.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Report</title>
+</head>
+<body>
+    <h1>Transaction Report for {{ user_profile.user.username }}</h1>
+    
+    <h2>Year-wise Summary</h2>
+    <ul>
+        {% for year in years %}
+            <li>{{ year }}:
+                {% for transaction in transactions|filter(year=year) %}
+                    {{ transaction.category }} - {{ transaction.amount }}<br>
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Month-wise Summary</h2>
+    <ul>
+        {% for month in months %}
+            <li>{{ month }}:
+                {% for transaction in transactions|filter(month=month) %}
+                    {{ transaction.category }} - {{ transaction.amount }}<br>
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <!-- Add more report sections as needed -->
+
+    <a href="{% url 'account' %}">Back to Account Page</a>
+</body>
+</html>
