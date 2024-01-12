@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # Add other user-related fields if needed
 
     def __str__(self):
         return self.user.username
@@ -16,4 +17,4 @@ class Transaction(models.Model):
     date = models.DateField()
 
     def __str__(self):
-        return f"{self.user_profile.user.username} - {self.date} - {self.category}"
+        return f"{self.user_profile.user.username} - {self.date} - {self.category} - {self.amount} - {self.mode_of_payment}"
