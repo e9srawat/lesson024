@@ -34,27 +34,6 @@ def user_login(request):
             messages.error(request, 'Invalid login credentials')
     return render(request, 'transactions/login.html')
 
-# @login_required
-# def account(request):
-#     user_profile = UserProfile.objects.get(user=request.user)
-#     transactions = Transaction.objects.filter(user_profile=user_profile)
-#     return render(request, 'transactions/account.html', {'user_profile': user_profile, 'transactions': transactions, 'transaction_form': TransactionForm()})
-
-
-# @csrf_protect
-# @login_required
-# def add_transaction(request):
-#     user_profile = UserProfile.objects.get(user=request.user)
-#     if request.method == 'POST':
-#         form = TransactionForm(request.POST)
-#         if form.is_valid():
-#             transaction = form.save(commit=False)
-#             transaction.user_profile = user_profile
-#             transaction.save()
-#             return redirect('add_transaction')
-#     else:
-#         form = TransactionForm()
-#     return render(request, 'transactions/add_transaction.html', {'form': form})
 
 from django.shortcuts import render, redirect
 from .forms import TransactionForm
@@ -66,7 +45,7 @@ from django.views.decorators.csrf import csrf_protect
 @login_required
 def add_transaction(request):
     user_profile = UserProfile.objects.get(user=request.user)
-    new_transaction = None  # Variable to store the newly created transaction
+    new_transaction = None  
 
     if request.method == 'POST':
         form = TransactionForm(request.POST)
@@ -74,7 +53,7 @@ def add_transaction(request):
             transaction = form.save(commit=False)
             transaction.user_profile = user_profile
             transaction.save()
-            new_transaction = transaction  # Assign the newly created transaction to the variable
+            new_transaction = transaction 
     else:
         form = TransactionForm()
 
@@ -83,7 +62,7 @@ def add_transaction(request):
     return render(request, 'transactions/add_transaction.html', {
         'form': form,
         'new_transaction': new_transaction,
-        'transactions': transactions,  # You can include other transactions for display as well
+        'transactions': transactions, 
     })
 
 
@@ -93,8 +72,7 @@ def generate_report(request):
     user_profile = request.user.userprofile 
     transactions = Transaction.objects.filter(user_profile=user_profile)
 
-    year_wise_transactions = {}  # Dictionary to store transactions year-wise
-
+    year_wise_transactions = {}  
     for transaction in transactions:
         year = transaction.date.year
         if year not in year_wise_transactions:

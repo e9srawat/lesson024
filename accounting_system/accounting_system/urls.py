@@ -23,7 +23,6 @@ urlpatterns = [
     path('', home, name='home'),
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
-    # path('account/', account, name='account'),
     path('add_transaction/', add_transaction, name='add_transaction'),
     path('generate_report/', generate_report, name='generate_report'),
     path('logout/', user_logout, name='logout'),
